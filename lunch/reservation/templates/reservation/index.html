@@ -24,8 +24,17 @@
         <p> Ding fan ma? </p>
         <form method="post" action="{% url resv:reservation %}">
             {% csrf_token %}
-            <button class="btn btn-primary btn-large">Wo yao ding!</button>
+            <input id="dingfan" type="button" class="btn btn-primary btn-large" value="Wo yao ding!">
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#dingfan').click(function() {
+        var retVal = confirm("Sure ?");
+        if( retVal == true ) {
+            $('form').submit();
+        }
+    });
+</script>
 {% endblock %}
