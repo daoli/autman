@@ -1,0 +1,35 @@
+{% extends "reservation/base.html" %}
+{% load i18n %}
+
+{% block title %} {% trans 'Login' %} {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="#">Yabroad DingFan!</a>
+        <!--<ul class="nav">
+          <li class="active"><a href="#">Home</a></li>
+        </ul> -->
+        <h5> {% now "SHORT_DATETIME_FORMAT" %} </h5>
+      </div>
+    </div>
+</div>
+<div class="container">
+    <div class="hero-unit">
+        <form action="{% url resv:login %}" method="post">
+            {% csrf_token %}
+            {% if next %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            {% endif %}
+            username:
+            <input type="text" name="username" value="{{ username }}" /><br />
+            password:
+            <input type="password" name="password" value="" /><br />
+
+            <input type="submit" value="Login" />
+        </form>
+    </div>
+</div>
+{% endblock %}
