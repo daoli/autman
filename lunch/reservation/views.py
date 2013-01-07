@@ -1,9 +1,20 @@
-# Create your views here.
 from reservation.models import Reservation
 from reservation.models import UserProfile
 from django.http import Http404
 from django.http import HttpResponse
+<<<<<<< HEAD
 from django.utils import timezone
+=======
+from django.views.generic import TemplateView
+
+
+class ReservationView(TemplateView):
+    template_name = 'reservation/index.html'
+
+    def get_context_data(self):
+        return {}
+
+>>>>>>> 7cf05203d015ecc6e819c477b7c049f4e697a728
 
 def reserve(request):
     user = request.user
