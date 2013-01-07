@@ -2,14 +2,20 @@ from reservation.models import Reservation
 from reservation.models import UserProfile
 from django.http import Http404
 from django.http import HttpResponse
-from django.views.generic import TemplateView
+from django.views.generic import View
+
+from django.template import RequestContext
+from django.shortcuts import render_to_response
 
 
-class ReservationView(TemplateView):
-    template_name = 'reservation/index.html'
+class ReservationView(View):
+    def get(self, request, *args, **kwargs):
+        return render_to_response('reservation/index.html',
+                              {},
+                              context_instance=RequestContext(request))
 
-    def get_context_data(self):
-        return {}
+    def post(self, request, *args, **kwargs):
+        pass
 
 
 def reserve(request):
