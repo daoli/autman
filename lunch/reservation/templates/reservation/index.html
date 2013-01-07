@@ -18,6 +18,9 @@
 </div>
 <div class="container">
     <div class="hero-unit">
+        <h4>{{ msg }}</h4>
+        Your balance now is {{ profile.balance }} CNY. <br>
+        Your have ordered {{ count_today }} meal(s) today.
         <p> Ding fan ma? </p>
         <form method="post" action="{% url resv:reservation %}">
             {% csrf_token %}

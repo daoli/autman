@@ -18,6 +18,7 @@
 </div>
 <div class="container">
     <div class="hero-unit">
+        <h4>{{ state }}</h4>
         <form action="{% url resv:login %}" method="post">
             {% csrf_token %}
             {% if next %}
