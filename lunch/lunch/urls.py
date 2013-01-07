@@ -4,9 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
-
-    url(r'^reserve/', include('reservation.urls', 'resv', 'resv')),
+    url(r'^lunch/', include('reservation.urls', 'resv', 'resv')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
