@@ -20,11 +20,13 @@ class ReservationView(View):
             data['msg'] = msg
 
         date = timezone.now().date
-        reservations = Reservation.objects.filter(user=user, date=date)
+        user_reservations = Reservation.objects.filter(user=user, date=date)
+        total_reservations = Reservation.objects.filter(date=date)
 
         data.update({
             'profile': profile,
-            'count_today': reservations.count(),
+            'user_count_today': user_reservations.count(),
+            'total_count_today': total_reservations.count(),
         })
 
         return data

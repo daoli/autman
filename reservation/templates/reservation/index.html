@@ -20,9 +20,10 @@
     <div class="hero-unit">
         <h4>{{ msg }}</h4>
         Your balance now is {{ profile.balance }} CNY. <br>
-        Your have ordered {{ count_today }} meal(s) today.
+        Your have ordered {{ user_count_today }} meal(s) today.
 
         <br>
+		We have already received {{ total_count_today }} order(s) today.
         <br>
         <br>
         <p> Ding fan ma? </p>
@@ -36,12 +37,12 @@
 <script type="text/javascript">
 var UserProfile = Backbone.Model.extend({
     balance: '',
-    count_today: '',
+    user_count_today: '',
 });
 
 var userProfile = new UserProfile({
     balance: {{ profile.balance }},
-    count_today: {{ count_today }},
+    user_count_today: {{ user_count_today }},
 });
 
 var PageView = Backbone.View.extend({
