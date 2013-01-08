@@ -21,6 +21,10 @@
         <h4>{{ msg }}</h4>
         Your balance now is {{ profile.balance }} CNY. <br>
         Your have ordered {{ count_today }} meal(s) today.
+
+        <br>
+        <br>
+        <br>
         <p> Ding fan ma? </p>
         <form method="post" action="{% url resv:reservation %}">
             {% csrf_token %}
@@ -30,11 +34,51 @@
 </div>
 
 <script type="text/javascript">
-    $('#dingfan').click(function() {
+var UserProfile = Backbone.Model.extend({
+    balance: '',
+    count_today: '',
+});
+
+var userProfile = new UserProfile({
+    balance: {{ profile.balance }},
+    count_today: {{ count_today }},
+});
+
+var PageView = Backbone.View.extend({
+    el: $('form'),
+    events: {
+        'click input#dingfan': 'order_meal',
+    },
+
+    initialize: function() {
+        var self = this;
+        var date = new Date();
+
+        var cannot_order = false;
+
+        if (userProfile.get('balance') < 10) {
+            cannot_order = true;
+            self.$('#dingfan').attr('title', 'Cannot order meal, no money');
+        }
+        if (date.getHours() >= 11) {
+            cannot_order = true;
+            self.$('#dingfan').attr('title', 'Cannot order meal, too late...');
+        }
+
+        if (cannot_order) {
+            self.$('#dingfan').attr('disabled', 'disabled');
+        }
+    },
+
+    order_meal: function() {
+        var self = this;
         var retVal = confirm("Sure ?");
         if( retVal == true ) {
             $('form').submit();
         }
-    });
+    }
+});
+
+var pageView = new PageView();
 </script>
 {% endblock %}
