@@ -1,0 +1,27 @@
+{% extends "reservation/base.html" %}
+{% load i18n %}
+
+{% block title %} {% trans 'Ding Fan' %} {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="{% url resv:reservation %}">Yabroad DingFan!</a>
+        <ul class="nav nav-pills pull-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {% trans 'Hi' %} {{ user }}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                <!-- links -->
+                <li><a tabindex="-1" href="{% url resv:history %}">Charge History</a></li>
+                </ul>
+            </li>
+        </ul>
+      </div>
+    </div>
+</div>
+<div class="container">
+    {% block main %} {% endblock %}
+</div>
+{% endblock %}
