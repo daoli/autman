@@ -1,29 +1,14 @@
-{% extends "reservation/base.html" %}
+{% extends "reservation/layout.html" %}
 {% load i18n %}
 
-{% block title %} {% trans 'Ding Fan' %} {% endblock %}
-
-{% block content %}
-
-<div class="container">
-    <div class="navbar">
-      <div class="navbar-inner">
-        <a class="brand" href="#">Yabroad DingFan!</a>
-        <!--<ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-        </ul> -->
-        <h5> {% now "SHORT_DATETIME_FORMAT" %} </h5>
-      </div>
-    </div>
-</div>
-<div class="container">
+{% block main %}
     <div class="hero-unit">
         <h4>{{ msg }}</h4>
         Your balance now is {{ profile.balance }} CNY. <br>
         Your have ordered {{ user_count_today }} meal(s) today.
 
         <br>
-		We have already received {{ total_count_today }} order(s) today.
+        We have already received {{ total_count_today }} order(s) today.
         <br>
         <br>
         <p> Ding fan ma? </p>
@@ -32,7 +17,6 @@
             <input id="dingfan" type="button" class="btn btn-primary btn-large" value="Wo yao ding!">
         </form>
     </div>
-</div>
 
 <script type="text/javascript">
 var UserProfile = Backbone.Model.extend({

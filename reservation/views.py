@@ -1,7 +1,9 @@
+from reservation.models import RechargeHistory
 from reservation.models import Reservation
 from reservation.models import UserProfile
 from django.utils import timezone
 from django.views.generic import View
+from django.views.generic import TemplateView
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login
@@ -9,8 +11,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 
-class ReservationView(View):
-    def get_information(self, request):
+def _get_information(request):
         data = {}
         user = request.user
         profile = UserProfile.objects.get(user=user)
@@ -24,6 +25,7 @@ class ReservationView(View):
         total_reservations = Reservation.objects.filter(date=date)
 
         data.update({
+            'user': user,
             'profile': profile,
             'user_count_today': user_reservations.count(),
             'total_count_today': total_reservations.count(),
@@ -31,9 +33,23 @@ class ReservationView(View):
 
         return data
 
+
+class ChargeHistoryView(TemplateView):
+    template_name = 'reservation/charge_history.html'
+
+    def get_context_data(self):
+        histories = RechargeHistory.objects.filter(user=self.request.user)
+        context_data = _get_information(self.request)
+        context_data.update({
+            'histories': histories,
+        })
+        return context_data
+
+
+class ReservationView(View):
     def get(self, request, *args, **kwargs):
         return render_to_response('reservation/index.html',
-                              self.get_information(request),
+                              _get_information(request),
                               context_instance=RequestContext(request))
 
     def post(self, request, *args, **kwargs):
