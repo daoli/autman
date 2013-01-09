@@ -16,7 +16,6 @@ class UserProfileAdmin(admin.ModelAdmin):
                     'balance',
                     )
     readonly_fields = (
-                       'user',
                        'balance',
                        )
 
