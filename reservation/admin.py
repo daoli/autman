@@ -15,7 +15,10 @@ class UserProfileAdmin(admin.ModelAdmin):
                     'user',
                     'balance',
                     )
-    readonly_fields = ('balance',)
+    readonly_fields = (
+                       'user',
+                       'balance',
+                       )
 
     def save_model(self, request, obj, form, change):
         if form and form.cleaned_data['recharge_amount']:
@@ -36,6 +39,11 @@ class RechargeHistoryAdmin(admin.ModelAdmin):
                     'admin',
                     'datetime',
                     )
+    readonly_fields = ('user',
+                       'recharge_amount',
+                       'admin',
+                       'datetime',
+                       )
 
 
 admin.site.register(RechargeHistory, RechargeHistoryAdmin)

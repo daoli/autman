@@ -3,16 +3,17 @@ import random
 import string
 from reservation.models import UserProfile
 
-names = []
+names = [('username', 'email@example.com'),
+         ]
 
 
 def generate_pw(n=10):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(n))
 
 
-for name in names:
-	pw = generate_pw()
-	user = User.objects.create_user(name, 'example@example.com', pw)
-	print name, pw
-	profile = UserProfile.objects.create(user=user)
+for name, email in names:
+    pw = generate_pw()
+    user = User.objects.create_user(name, email, pw)
+    print name, email, pw
+    profile = UserProfile.objects.create(user=user)
 
