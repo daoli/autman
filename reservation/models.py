@@ -34,3 +34,4 @@ class RechargeHistory(models.Model):
 
     class Meta:
         verbose_name_plural = "recharge history"
+        ordering = ['-datetime']
